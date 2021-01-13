@@ -24,32 +24,41 @@ def Wether():
     state = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("div").text.strip()
     description = contentList[2].find("div", class_="CurrentConditions--precipValue--RBVJT").find("span").text.strip()
     feelsLike = contentList[5].find("span", class_="TodayDetailsCard--feelsLikeTempValue--2aogo").text.strip()
-    highLow = ''
-    humidity = ''
-    pressure = ''
-    wind = ''
-    moonPhase = ''
-    dailyValues = []
-
+    
+    auxBox = contentList[5].find_all("div", class_="WeatherDetailsListItem--wxData--23DP5")
+    highLow = auxBox[0].text.strip()
+    wind = auxBox[1].find('span').text.strip()
+    humidity = auxBox[2].find('span').text.strip()
+    pressure = auxBox[4].find('span').text.strip()
+    visibility = auxBox[6].text.strip()
+    moonPhase = auxBox[7].text.strip()
+    
     auxBox = contentList[3].find("ul")
+    dailyValues = []
     for item in auxBox.find_all("li"):
         dailyValues.append({
             'Period': item.find("h3").find("span").text.strip(),
             'Temperature': item.find("div", class_="Column--temp--2v_go").find("span").text.strip(),
             'RainChance': item.find("div", class_="Column--precip--2H5Iw").find("span").text.strip().replace("Chance of Rain", ""),
         })
-       
-    todayValues = []
-    hourlyValues = []
 
-    # for dataBox in soup.find_all("tr", class_="rstable_td"):
-    #     itens = dataBox.find_all("td")
-    #     date = itens[0].text.strip()
-    #     info = itens[1].text.strip().split("\t\t\t\t\t\t")
-    #     concurse = info[0].replace("\n", "").strip()
-    #     winners = info[1].replace("Ganhadores:", "").strip()
-    #     value = info[2].replace("Prêmio:", "").strip()
-    #     numbers = [item.text for item in itens[2].find_all("div")]
+    auxBox = contentList[6].find("ul")
+    hourlyValues = []
+    for item in auxBox.find_all("li"):
+        hourlyValues.append({
+            'Period': item.find("h3").find("span").text.strip(),
+            'Temperature': item.find("div", class_="Column--temp--2v_go").find("span").text.strip(),
+            'RainChance': item.find("div", class_="Column--precip--2H5Iw").find("span").text.strip().replace("Chance of Rain", ""),
+        })
+
+    auxBox = contentList[7].find("ul")
+    todayValues = []
+    for item in auxBox.find_all("li"):
+        todayValues.append({
+            'Period': item.find("h3").find("span").text.strip(),
+            'Temperature': item.find("div", class_="Column--temp--2v_go").find("span").text.strip(),
+            'RainChance': item.find("div", class_="Column--precip--2H5Iw").find("span").text.strip().replace("Chance of Rain", ""),
+        })
 
     return jsonify({ 
         'Title': title,
@@ -62,6 +71,7 @@ def Wether():
         'Humidity': humidity,
         'Pressure': pressure,
         'Wind': wind,
+        'Visibility': visibility,
         'MoonPhase': moonPhase,
         'TodayValues': todayValues,
         'DailyValues': dailyValues,
