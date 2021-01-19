@@ -22,7 +22,7 @@ def Wether():
     checkTime = contentList[2].find("div").find("div", class_="CurrentConditions--timestamp--1SWy5").text.strip()
     temperature = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("span").text.strip()
     state = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("div").text.strip()
-    description = contentList[2].find("div", class_="CurrentConditions--precipValue--RBVJT").find("span").text.strip()
+    description = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("div").text.strip()
     feelsLike = contentList[5].find("span", class_="TodayDetailsCard--feelsLikeTempValue--2aogo").text.strip()
     
     auxBox = contentList[5].find_all("div", class_="WeatherDetailsListItem--wxData--23DP5")
@@ -80,4 +80,4 @@ def Wether():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='127.0.0.1', port=port)
