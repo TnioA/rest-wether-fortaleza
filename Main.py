@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 class Main:
     def __init__(self):
-        dotenv_path = join(dirname(__file__), 'config.py')
+        dotenv_path = join(dirname(__file__), '.env')
         load_dotenv(dotenv_path)
 
         host = os.getenv('FLASK_HOST')
