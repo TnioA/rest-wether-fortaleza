@@ -3,3 +3,4 @@ Flask==0.12
 Werkzeug==0.16
 requests
 flask-cors
+python-dotenv
