@@ -8,7 +8,7 @@ FLASK_ENV="development"
 FLASK_APP="myapp.app.py"
 FLASK_PORT=5000
 FLASK_DEBUG=True
-FLASK_HOST="127.0.0.1"
+FLASK_HOST="0.0.0.0"
 
 MAIL_USERNAME="myemail@gmail.com"
 MAIL_PASSWORD="my secret password"
