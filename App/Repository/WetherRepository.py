@@ -17,13 +17,13 @@ class WetherRepository:
         contentList = self.soup.find_all("section")
 
         responseModel.Title = contentList[2].find("h1").text.strip()
-        responseModel.CheckTime = contentList[2].find("div").find("div", class_="CurrentConditions--timestamp--1SWy5").text.strip()
-        responseModel.Temperature = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("span").text.strip()
-        responseModel.State = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("div").text.strip()
-        responseModel.Description = contentList[2].find("div", class_="CurrentConditions--primary--3xWnK").find("div").text.strip()
-        responseModel.FeelsLike = contentList[5].find("span", class_="TodayDetailsCard--feelsLikeTempValue--2aogo").text.strip()
+        responseModel.CheckTime = contentList[2].find("div").find("div", class_="CurrentConditions--timestamp--23dfw").text.strip()
+        responseModel.Temperature = contentList[2].find("div", class_="CurrentConditions--primary--2SVPh").find("span").text.strip()
+        responseModel.State = contentList[2].find("div", class_="CurrentConditions--primary--2SVPh").find("div").text.strip()
+        responseModel.Description = contentList[2].find("div", class_="CurrentConditions--primary--2SVPh").find("div").text.strip()
+        responseModel.FeelsLike = contentList[5].find("span", class_="TodayDetailsCard--feelsLikeTempValue--Cf9Sl").text.strip()
         
-        auxBox = contentList[5].find_all("div", class_="WeatherDetailsListItem--wxData--23DP5")
+        auxBox = contentList[5].find_all("div", class_="WeatherDetailsListItem--wxData--2s6HT")
 
         responseModel.HighLow = auxBox[0].text.strip()
         responseModel.Wind = auxBox[1].find('span').text.strip()
@@ -37,8 +37,8 @@ class WetherRepository:
         for item in auxBox.find_all("li"):
             responseModel.DailyValues.append({
                 'Period': item.find("h3").find("span").text.strip(),
-                'Temperature': item.find("div", class_="Column--temp--2v_go").find("span").text.strip(),
-                'RainChance': item.find("div", class_="Column--precip--2H5Iw").find("span").text.strip().replace("Chance of Rain", ""),
+                'Temperature': item.find("div", class_="Column--temp--5hqI_").find("span").text.strip(),
+                'RainChance': item.find("div", class_="Column--precip--2ck8J").find("span").text.strip().replace("Chance of Rain", ""),
             })
 
         auxBox = contentList[6].find("ul")
@@ -46,8 +46,8 @@ class WetherRepository:
         for item in auxBox.find_all("li"):
             responseModel.HourlyValues.append({
                 'Period': item.find("h3").find("span").text.strip(),
-                'Temperature': item.find("div", class_="Column--temp--2v_go").find("span").text.strip(),
-                'RainChance': item.find("div", class_="Column--precip--2H5Iw").find("span").text.strip().replace("Chance of Rain", ""),
+                'Temperature': item.find("div", class_="Column--temp--5hqI_").find("span").text.strip(),
+                'RainChance': item.find("div", class_="Column--precip--2ck8J").find("span").text.strip().replace("Chance of Rain", ""),
             })
 
         auxBox = contentList[7].find("ul")
@@ -55,8 +55,8 @@ class WetherRepository:
         for item in auxBox.find_all("li"):
             responseModel.TodayValues.append({
                 'Period': item.find("h3").find("span").text.strip(),
-                'Temperature': item.find("div", class_="Column--temp--2v_go").find("span").text.strip(),
-                'RainChance': item.find("div", class_="Column--precip--2H5Iw").find("span").text.strip().replace("Chance of Rain", ""),
+                'Temperature': item.find("div", class_="Column--temp--5hqI_").find("span").text.strip(),
+                'RainChance': item.find("div", class_="Column--precip--2ck8J").find("span").text.strip().replace("Chance of Rain", ""),
             })
 
         return responseModel

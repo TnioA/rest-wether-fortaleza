@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from App import app
+from dotenv import load_dotenv
 import os
-from os.path import join, dirname
+
+load_dotenv()
 
 class Main:
     def __init__(self):
 
         if __name__ == '__main__':
-            port = int(os.environ.get('PORT', 5000))
-            app.run(host='0.0.0.0', port=port)
+            host = os.getenv('FLASK_HOST')
+            port = int(os.getenv('FLASK_PORT'))
+            app.run(host=host, port=port)
 
 main = Main()
