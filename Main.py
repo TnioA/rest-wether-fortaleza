@@ -8,7 +8,7 @@ class Main:
     def __init__(self):
         if __name__ == '__main__':
             host = os.getenv('FLASK_HOST')
-            port = os.getenv('FLASK_PORT', default=5000)
+            port = int(os.getenv('FLASK_PORT', default=5000))
             app.run(host=host, port=port)
 
 main = Main()
